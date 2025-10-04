@@ -4,6 +4,7 @@ The **rob_ctrl.py** launches a MuJoCo dual-arm scene with a free tray and a para
 
 # Quick start
 
+Change Directory:
 ```bash
 cd ~/<Path to DART-Dual...-Manipulation>/RMPC
 ```
@@ -69,3 +70,4 @@ python dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 --mass
    * **JSON includes:**
 
       * pos_err, pos_err_norm, u_cmd, torque, timestep arrays
+
