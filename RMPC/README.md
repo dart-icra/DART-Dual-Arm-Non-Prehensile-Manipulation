@@ -4,19 +4,23 @@ The **rob_ctrl.py** launches a MuJoCo dual-arm scene with a free tray and a para
 
 # Quick start
 
+```bash
+cd ~/<Path to DART-Dual...-Manipulation>/RMPC
+```
+
 Sphere, radius 0.025 m, mass 2.0 kg, friction [0.2, 0.2, 0.002], target at (+0.05, +0.05) m relative to tray center:
 ```bash
-python RMPC/dev_dual/rob_ctrl.py --object sphere --radius 0.025 --mass 2.0 --mu 0.2 0.2 0.002 --tx 0.05 --ty 0.05
+python dev_dual/rob_ctrl.py --object sphere --radius 0.025 --mass 2.0 --mu 0.2 0.2 0.002 --tx 0.05 --ty 0.05
 ```
 
 Cube, edge 0.04 m, mass 1.5 kg, friction [0.3, 0.1, 0.001], target at (-0.06, +0.02) m:
 
 ```bash
-python RMPC/dev_dual/rob_ctrl.py --object cube --edge 0.04 --mass 1.5 --mu 0.3 0.1 0.001 --tx -0.06 --ty 0.02
+python dev_dual/rob_ctrl.py --object cube --edge 0.04 --mass 1.5 --mu 0.3 0.1 0.001 --tx -0.06 --ty 0.02
 ```
 Cylinder, radius 0.03 m, height 0.06 m, mass 1.0 kg, friction [0.25 0.15 0.002], target at (+0.02,-0.03) m:
 ```bash
-python RMPC/dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 --mass 1.0 --mu 0.25 0.15 0.002 --tx 0.02 --ty -0.03
+python dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 --mass 1.0 --mu 0.25 0.15 0.002 --tx 0.02 --ty -0.03
 ```
 
 # CLI arguments
@@ -63,4 +67,5 @@ python RMPC/dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 -
 
 * **JSON logs:** {object}_m{mass}_mu{mu_t}-{mu_tors}-{mu_roll}_tx{tx}_ty{ty}.json
    * **JSON includes:**
+
       * pos_err, pos_err_norm, u_cmd, torque, timestep arrays
