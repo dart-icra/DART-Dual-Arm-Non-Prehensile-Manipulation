@@ -50,9 +50,9 @@ python dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 --mass
 
 * **Initial object pose (world frame, optional):**
 
-    * **--obj_pos**: Position; if omitted, object is placed above tray center with a small offset
+    * **--obj_pos**: Position x y z; if omitted, object is placed above tray center
 
-    * **--obj_quat**: Orientation quaternion w x y z (optional)
+    * **--obj_quat**: Orientation quaternion w x y z 
 
 * **Tray-relative target:**
 
@@ -70,4 +70,5 @@ python dev_dual/rob_ctrl.py --object cylinder --radius 0.03 --height 0.06 --mass
    * **JSON includes:**
 
       * pos_err, pos_err_norm, u_cmd, torque, timestep arrays
+
 
