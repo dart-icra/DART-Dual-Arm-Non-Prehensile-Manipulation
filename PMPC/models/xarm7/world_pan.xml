@@ -1,0 +1,336 @@
+<mujoco model="xarm7_tray">
+	<!--? Basic compiler and simulation options -->
+	<compiler angle="radian" inertiafromgeom="true" meshdir="./assets"
+		texturedir="./assets" autolimits="true" />
+	<option gravity="0 0 -9.81" integrator="implicitfast" noslip_iterations="100" />
+	<size njmax="200" nconmax="200" /> <!--
+	? do not know what this does-->
+
+	<!--?
+	Defaults for geoms and joints -->
+	<!--?
+	=================================================================================================================================================================================== -->
+	<!--?
+	=================================================================================================================================================================================== -->
+	<!--?
+	=================================================================================================================================================================================== -->
+
+	<!-- ! moved to main file to satisfy reference mechanics -->
+	<default>
+		<default class="xarm7">
+			<geom type="mesh" material="white" />
+			<joint axis="0 0 1" armature="0.1" range="-6.28319 6.28319" frictionloss="1" />
+			<general biastype="affine" ctrlrange="-6.28319 6.28319" />
+			<default class="size1">
+				<joint damping="10" />
+				<general gainprm="1500" biasprm="0 -1500 -150" forcerange="-50 50" />
+			</default>
+			<default class="size2">
+				<joint damping="5" />
+				<general gainprm="1000" biasprm="0 -1000 -100" forcerange="-30 30" />
+			</default>
+			<default class="size3">
+				<joint damping="2" />
+				<general gainprm="800" biasprm="0 -800 -80" forcerange="-20 20" />
+			</default>
+			<default class="spring_link">
+				<joint range="0 0.85" stiffness="0.05" springref="2.62" damping="0.00125" />
+			</default>
+			<default class="driver">
+				<joint range="0 0.85" armature="0.005" damping="0.1" solreflimit="0.005 1" />
+			</default>
+			<default class="follower">
+				<joint range="0 0.85" solreflimit="0.005 1" />
+			</default>
+			<default class="visual">
+				<geom type="mesh" contype="0" conaffinity="0" group="2" />
+			</default>
+			<default class="collision">
+				<geom type="mesh" group="3" />
+				<default class="pad_box1">
+					<geom type="box" friction="0.7" solimp="0.95 0.99 0.001" solref="0.004 1"
+						mass="0" priority="1" size="0.015 0.002 0.0095" rgba="0.0 0.1 0.7 1" />
+				</default>
+				<default class="pad_box2">
+					<geom type="box" friction="0.6" solimp="0.95 0.99 0.001" solref="0.004 1"
+						mass="0" priority="1" size="0.015 0.002 0.0095" rgba="0.0 0.5 0.5 1" />
+				</default>
+			</default>
+			<site size="0.001" rgba="1 0 0 1" group="4" />
+		</default>
+	</default>
+
+	<default>
+        <default class="grab">
+            <joint limited="false" margin="0.01" armature="0.001" damping="0" frictionloss="0.001" />
+            <geom type="mesh"  rgba="0 0.8 0.4 1.0"/>
+            <site size="0.005 0 0" rgba="0.4 0.9 0.4 1" />
+            <default class="object_col">
+                <geom type="mesh" density="1250" contype="1" conaffinity="1" friction="0.1 0.5 0.01" margin="0.0005" condim="4" rgba=".3 .4 .5 1" group="3"/>
+            </default>
+        </default>
+    </default>
+	<asset>
+		<material name="white" rgba="1 1 1 1" />
+		<material name="gray" rgba="0.753 0.753 0.753 1" />
+		<material name="black" rgba="0.149 0.149 0.149 1" />
+
+		<mesh file="link_base.stl" />
+		<mesh file="link1.stl" />
+		<mesh file="link2.stl" />
+		<mesh file="link3.stl" />
+		<mesh file="link4.stl" />
+		<mesh file="link5.stl" />
+		<mesh file="link6.stl" />
+		<mesh file="link7.stl" />
+		<mesh file="end_tool.stl" />
+		<mesh file="base_link.stl" />
+		<mesh file="left_outer_knuckle.stl" />
+		<mesh file="left_finger.stl" />
+		<mesh file="left_inner_knuckle.stl" />
+		<mesh file="right_outer_knuckle.stl" />
+		<mesh file="right_finger.stl" />
+		<mesh file="right_inner_knuckle.stl" />
+		
+		<!-- Knife object meshes -->
+		<mesh name="fryingpan" file="../../../object_sim/fryingpan/fryingpan.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact0" file="../../../object_sim/fryingpan/contact0.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact1" file="../../../object_sim/fryingpan/contact1.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact2" file="../../../object_sim/fryingpan/contact2.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact3" file="../../../object_sim/fryingpan/contact3.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact4" file="../../../object_sim/fryingpan/contact4.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact5" file="../../../object_sim/fryingpan/contact5.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact6" file="../../../object_sim/fryingpan/contact6.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact7" file="../../../object_sim/fryingpan/contact7.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact8" file="../../../object_sim/fryingpan/contact8.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact9" file="../../../object_sim/fryingpan/contact9.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact10" file="../../../object_sim/fryingpan/contact10.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact11" file="../../../object_sim/fryingpan/contact11.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact12" file="../../../object_sim/fryingpan/contact12.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact13" file="../../../object_sim/fryingpan/contact13.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact14" file="../../../object_sim/fryingpan/contact14.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact15" file="../../../object_sim/fryingpan/contact15.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact16" file="../../../object_sim/fryingpan/contact16.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact17" file="../../../object_sim/fryingpan/contact17.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact18" file="../../../object_sim/fryingpan/contact18.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact19" file="../../../object_sim/fryingpan/contact19.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact20" file="../../../object_sim/fryingpan/contact20.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact21" file="../../../object_sim/fryingpan/contact21.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact22" file="../../../object_sim/fryingpan/contact22.stl" scale="0.7 0.7 0.7"/>		
+	</asset>
+
+	<default>
+		<geom rgba="0.7 0.7 0.7 1" solref="0.002 1" friction="0.2 0.2 0.005"
+			solimp="0.9 0.95 0.001" contype="1" conaffinity="1" />
+		<joint type="free" damping="0" limited="false" />
+	</default>
+
+	<asset>
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+			height="3072" />
+		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+			rgb2="0.1 0.2 0.3"
+			markrgb="0.8 0.8 0.8" width="300" height="300" />
+		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+			reflectance="0.2" specular="0.2" shininess="0.1" />
+	</asset>
+
+	<visual>
+		<headlight diffuse="0.6 0.6 0.6" ambient="0.6 0.6 0.6" specular="0 0 0.6" />
+		<rgba haze="0.15 0.25 0.35 1" />
+		<global azimuth="-225" elevation="-45" offheight="1080" offwidth="1920" />
+	</visual>
+
+	<asset>
+		<material name="mat_tray" rgba="0.5 0.5 0.5 1" reflectance="0.0" specular="0.4"
+			shininess="0.6" />
+		<material name="mat_cube" rgba="0.0 0.9 0.2 1" reflectance="0.0" specular="0.5"
+			shininess="0.7" />
+	</asset>
+
+	<!--?
+	=================================================================================================================================================================================== -->
+	<!--?
+	=================================================================================================================================================================================== -->
+	<!--?
+	=================================================================================================================================================================================== -->
+
+
+	<worldbody>
+<camera name="result_cam" pos="0.007 -1.232 1.541" xyaxes="1.000 0.006 0.000 -0.004 0.781 0.624"/>
+		<!--?
+		Lighting and ground plane -->
+		<light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+		<geom name="floor" type="plane" size="5 5 0.1" material="groundplane" contype="1"
+			conaffinity="1" />
+		<camera name="data_collection" mode="fixed" pos="1.213 -1.055 1.190" xyaxes="0.656 0.755 0.000 -0.449 0.390 0.804"/>
+
+		<body name="L_world_virtual_link" pos="-0.7 0 -0.12" quat="0.707 0 0 -0.707">
+			<include file="./chainL.xml" />
+		</body>
+
+		<body name="R_world_virtual_link" pos="0.7 0 -0.12" quat="0.707 0 0 -0.707">
+			<include file="./chainR.xml" />
+		</body>
+
+		<!-- ? Free-moving tray body -->
+		<body name="tray" pos="0 0 0.4">
+			<freejoint name="tray_free" />
+			<geom name="tray_bottom" type="box" size="0.2 0.15 0.005" pos="0 0 0"
+				material="mat_tray" mass = "1" />
+			<!-- <geom name="tray_wall_ypos" type="box" size="0.18 0.005 0.01" pos="0 0.155 0.03"
+				material="mat_tray" density="6" />
+			<geom name="tray_wall_yneg" type="box" size="0.18 0.005 0.01" pos="0 -0.155 0.03"
+				material="mat_tray" density="6" /> -->
+			<!-- <site name="target_site" pos="0 0 0.012" type="sphere" size="0.02" rgba="0.9 0.0 0.2 1"/> -->
+			<!-- Define the first bar of the cross (e.g., horizontal) -->
+			<site name="cross_bar_h" type="box" size="0.02 0.002 0.001" pos="0 0 0.012" rgba="1 0 0 1"/>
+			<!-- Define the second bar of the cross (e.g., vertical) -->
+			<site name="cross_bar_v" type="box" size="0.002 0.02 0.001" pos="0 0 0.012" rgba="1 0 0 1"/>
+			<site name="tolerance_ring" 
+            type="cylinder" 
+            pos="0 0 0.012" 
+            size="0.01 0.005" 
+            rgba="0 0.5 0 0.2"/>
+<!-- <body name="support_grasp_1" pos="0.17 -0.0 0.0">
+				<geom type="box" size="0.02 0.08 0.015" rgba="0 0 1 1 " friction="1 0.5 0.01" condim="6"/>
+				<inertial pos="0 0 0" mass="0.0" diaginertia="0.03013 0.08413 0.11333"/>
+			</body>
+			<body name="support_grasp_2" pos="-0.17 0.0 0.0">
+				<geom type="box" size="0.02 0.08 0.015" rgba="0 0 1 1 " friction="1 0.5 0.01" condim="6"/>
+				<inertial pos="0 0 0" mass="0.0" diaginertia="0.03013 0.08413 0.11333"/>
+			</body> -->
+		</body>
+
+		<!--?
+		Mocap body -->
+		<body name="mocap_marker" mocap="true" pos="0 0 0.3">
+			<geom type="sphere" size="0.01" rgba="1 0 0 0.6" contype="0" conaffinity="0" />
+		</body>
+
+		<body name="R_mocap_marker" mocap="true" pos="0.2 0 0.4" quat="0.5 -0.5 -0.5 0.5">
+			<geom type="box" size="0.05 0.05 0.05" rgba="1 0 0 0" contype="0" conaffinity="0" />
+			<site name="Rtarg" />
+		</body>
+
+		<body name="L_mocap_marker" mocap="true" pos="-0.2 0 0.4" quat="0.5 0.5 0.5 0.5">
+			<geom type="box" size="0.05 0.05 0.05" rgba="1 0 0 0" contype="0" conaffinity="0" />
+			<site name="Ltarg" />
+		</body>
+
+		<!--?
+		Free-moving cube body -->
+		<!-- <body name="cube" pos="0.05 0.05 0.33">
+			<freejoint name="cube_free" />
+			<geom name="cube_geom" type="box" size="0.024 0.024 0.024" material="mat_cube"
+				density="10" rgba="0.0 0.9 0.2 1" conaffinity="0" />
+		</body> -->
+		<!-- <body name="cube2" pos="0.0 0.0 3" quat="0.7071068 0 0 0.7071068">
+			<freejoint name="cube_free" />
+			<geom name="cube_geom" type="sphere" size=" 0.024 0.024" material="mat_cube"
+				mass ="5" rgba="0.0 0.9 0.2 1" conaffinity="0" />
+		</body> -->
+
+		<!-- Knife object -->
+		<body name="fryingpan" pos="0 0 0.6" childclass="grab" >
+			<freejoint name="fryingpan_free" />
+			<geom name="fryingpan_visual" mesh="fryingpan" mass="0.5"/>
+			<geom name="fryingpan_contact0" mesh="contact0" class="object_col"/>
+			<geom name="fryingpan_contact1" mesh="contact1" class="object_col"/>
+            <geom name="fryingpan_contact2" mesh="contact2" class="object_col"/>
+            <geom name="fryingpan_contact3" mesh="contact3" class="object_col"/>
+            <geom name="fryingpan_contact4" mesh="contact4" class="object_col"/>
+            <geom name="fryingpan_contact5" mesh="contact5" class="object_col"/>
+            <geom name="fryingpan_contact6" mesh="contact6" class="object_col"/>
+            <geom name="fryingpan_contact7" mesh="contact7" class="object_col"/>
+            <geom name="fryingpan_contact8" mesh="contact8" class="object_col"/>
+            <geom name="fryingpan_contact9" mesh="contact9" class="object_col"/>
+            <geom name="fryingpan_contact10" mesh="contact10" class="object_col"/>
+            <geom name="fryingpan_contact11" mesh="contact11" class="object_col"/>
+            <geom name="fryingpan_contact12" mesh="contact12" class="object_col"/>
+            <geom name="fryingpan_contact13" mesh="contact13" class="object_col"/>
+            <geom name="fryingpan_contact14" mesh="contact14" class="object_col"/>
+            <geom name="fryingpan_contact15" mesh="contact15" class="object_col"/>
+            <geom name="fryingpan_contact16" mesh="contact16" class="object_col"/>
+            <geom name="fryingpan_contact17" mesh="contact17" class="object_col"/>
+            <geom name="fryingpan_contact18" mesh="contact18" class="object_col"/>
+            <geom name="fryingpan_contact19" mesh="contact19" class="object_col"/>
+            <geom name="fryingpan_contact20" mesh="contact20" class="object_col"/>
+            <geom name="fryingpan_contact21" mesh="contact21" class="object_col"/>
+            <geom name="fryingpan_contact22" mesh="contact22" class="object_col"/>
+		</body>
+	</worldbody>
+
+	<!--?
+	Equality constraint to weld tray and mocap -->
+	<equality>
+		<!-- <weld body1="tray" body2="mocap_marker" relpose="0 0 0 1 0 0 0" /> -->
+		<!-- <weld body1="cube" body2="test_mocap_marker" relpose="0 0 -0.3 1 0 0 0"/> -->
+	</equality>
+
+	<keyframe>
+		<key name="home" qpos="2 -0.15 -0.38 0.49 0.11 -0.93 1.4 0.0018 0.47 6.4e-05 0.0051 0.38 3e-05 -1.1 -0.12 -0.47 0.5 -0.018 -0.97 -1.6 0.0012 0.47 5.9e-05 0.0057 0.37 3.5e-05 2.3e-16 -4.5e-16 0.4 1 3.3e-18 -7e-20 -9.2e-16 0 0 0.42 0.707 0  0 0.707" />
+	</keyframe>
+
+	<contact>
+		<exclude body1="L_right_inner_knuckle" body2="L_right_outer_knuckle" />
+		<exclude body1="L_right_inner_knuckle" body2="L_right_finger" />
+		<exclude body1="L_left_inner_knuckle" body2="L_left_outer_knuckle" />
+		<exclude body1="L_left_inner_knuckle" body2="L_left_finger" />
+		<exclude body1="R_right_inner_knuckle" body2="R_right_outer_knuckle" />
+		<exclude body1="R_right_inner_knuckle" body2="R_right_finger" />
+		<exclude body1="R_left_inner_knuckle" body2="R_left_outer_knuckle" />
+		<exclude body1="R_left_inner_knuckle" body2="R_left_finger" />
+		<!-- <pair geom1="tray_bottom" geom2="cube_geom"
+          friction="1.0 0.05 0.001 0.00001 0.01" condim="6"/> -->
+	</contact>
+
+	<tendon>
+		<fixed name="L_split">
+			<joint joint="L_right_driver_joint" coef="0.5" />
+			<joint joint="L_left_driver_joint" coef="0.5" />
+		</fixed>
+		<fixed name="R_split">
+			<joint joint="R_right_driver_joint" coef="0.5" />
+			<joint joint="R_left_driver_joint" coef="0.5" />
+		</fixed>
+	</tendon>
+
+	<actuator>
+		<motor name="L_act1" joint="L_joint1" ctrlrange="-50 50" />
+		<motor name="L_act2" joint="L_joint2" ctrlrange="-50 50" />
+		<motor name="L_act3" joint="L_joint3" ctrlrange="-30 30" />
+		<motor name="L_act4" joint="L_joint4" ctrlrange="-30 30" />
+		<motor name="L_act5" joint="L_joint5" ctrlrange="-20 20" />
+		<motor name="L_act6" joint="L_joint6" ctrlrange="-20 20" />
+		<motor name="L_act7" joint="L_joint7" ctrlrange="-20 20" />
+
+		<motor name="R_act1" joint="R_joint1" ctrlrange="-50 50" />
+		<motor name="R_act2" joint="R_joint2" ctrlrange="-50 50" />
+		<motor name="R_act3" joint="R_joint3" ctrlrange="-30 30" />
+		<motor name="R_act4" joint="R_joint4" ctrlrange="-30 30" />
+		<motor name="R_act5" joint="R_joint5" ctrlrange="-20 20" />
+		<motor name="R_act6" joint="R_joint6" ctrlrange="-20 20" />
+		<motor name="R_act7" joint="R_joint7" ctrlrange="-20 20" />
+
+		<general name="L_gripper" tendon="L_split" forcerange="-50 50" ctrlrange="0 255"
+			biastype="affine" gainprm="0.333"
+			biasprm="0 -100 -10" />
+		<general name="R_gripper" tendon="R_split" forcerange="-50 50" ctrlrange="0 255"
+			biastype="affine" gainprm="0.333"
+			biasprm="0 -100 -10" />
+
+	</actuator>
+
+
+</mujoco>
+
+
+<!-- <key
+  time="18.52"
+  qpos="2.20798 -1.66125 -1.46296 1.07577 -1.59961 -1.43214 2.01429"
+  qvel="-0.109891 0.845348 -0.522322 -0.121233 0.413072 -0.733092 -0.0969345"
+  ctrl="5.7931 9.66809 -1.83357 0.204904 -2.41774 0.876507 0.704162"
+  mpos="0.4 0 0.5"
+  mquat="1 0 0 0"
+/> -->

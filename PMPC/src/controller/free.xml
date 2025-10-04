@@ -1,0 +1,87 @@
+<mujoco model="free_tray_and_cube">
+	<!-- Basic compiler and simulation options -->
+	<compiler angle="degree" coordinate="local" inertiafromgeom="true" meshdir="./" texturedir="./" />
+	<option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" noslip_iterations="100" />
+	<size njmax="200" nconmax="200" />
+
+	<!-- Defaults for geoms and joints -->
+	<default>
+		<geom rgba="0.7 0.7 0.7 1" friction="0.1 0.1 0.001" solref="0.002 1"
+			solimp="0.9 0.95 0.001" contype="1" conaffinity="1" />
+		<joint type="free" damping="0" limited="false" />
+	</default>
+
+	<asset>
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+			height="3072" />
+		<texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+			rgb2="0.1 0.2 0.3"
+			markrgb="0.8 0.8 0.8" width="300" height="300" />
+		<material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+			reflectance="0.2" specular="0.2" shininess="0.1" />
+	</asset>
+
+	<visual>
+		<headlight diffuse="0.6 0.6 0.6" ambient="0.6 0.6 0.6" specular="0 0 0.6" />
+		<rgba haze="0.15 0.25 0.35 1" />
+		<global azimuth="120" elevation="-20" />
+	</visual>
+
+	<asset>
+		<material name="mat_tray" rgba="0.55 0.55 0.6 1" reflectance="0.0" specular="0.4"
+			shininess="0.6" />
+		<material name="mat_cube" rgba="0.0 0.9 0.2 1" reflectance="0.0" specular="0.5"
+			shininess="0.7" />
+	</asset>
+
+	<worldbody>
+		<!-- Lighting and ground plane -->
+		<light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+		<geom name="floor" type="plane" size="5 5 0.1" material="groundplane" contype="1"
+			conaffinity="1" />
+
+		<!-- Free-moving tray body -->
+		<body name="tray" pos="0 0 0.3">
+			<freejoint name="tray_free" />
+			<geom name="tray_bottom" type="box" size="0.15 0.12 0.005" pos="0 0 0"
+				material="mat_tray" density="6" />
+			<geom name="tray_wall_ypos" type="box" size="0.15 0.005 0.01" pos="0 0.125 0.03"
+				material="mat_tray" density="6" />
+			<geom name="tray_wall_yneg" type="box" size="0.15 0.005 0.01" pos="0 -0.125 0.03"
+				material="mat_tray" density="6" />
+			<geom name="tray_wall_xpos" type="box" size="0.005 0.12 0.01" pos="0.155 0 0.03"
+				material="mat_tray" density="6" />
+			<geom name="tray_wall_xneg" type="box" size="0.005 0.12 0.01" pos="-0.155 0 0.03"
+				material="mat_tray" density="6" />
+		</body>
+
+		<!-- Mocap body -->
+		<body name="mocap_marker" mocap="true" pos="0 0 0.3">
+			<geom type="sphere" size="0.01" rgba="1 0 0 0.6" contype="0" conaffinity="0"/>
+		</body>
+
+		<body name="test_mocap_marker" mocap="true" pos="0 0 0.4">
+			<geom type="sphere" size="0.01" rgba="1 0 0 0.6" contype="0" conaffinity="0"/>
+		</body>
+
+		<!-- Free-moving cube body -->
+		<body name="cube" pos="0.05 0.05 0.33">
+			<freejoint name="cube_free" />
+			<geom name="cube_geom" type="box" size="0.024 0.024 0.024" material="mat_cube"
+				density="10" rgba="0.0 0.9 0.2 1" conaffinity="0" />
+		</body>
+	</worldbody>
+
+	<!-- Equality constraint to weld tray and mocap -->
+	<equality>
+		<weld body1="tray" body2="mocap_marker" relpose="0 0 0 1 0 0 0"/>
+		<!-- <weld body1="cube" body2="test_mocap_marker" relpose="0 0 -0.3 1 0 0 0"/> -->
+	</equality>
+
+	<keyframe>
+	</keyframe>
+
+	<actuator>
+		<position joint="tray_free" kp="1" />
+	</actuator>
+</mujoco>

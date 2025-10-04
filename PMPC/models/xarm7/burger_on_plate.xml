@@ -1,0 +1,30 @@
+<mujocoinclude>
+  <compiler meshdir="assets" texturedir="assets" angle="radian" />
+  <option gravity="0 0 -9.81" />
+
+  <asset>
+    <!-- plate mesh -->
+    <mesh name="plate_mesh" file="plate.obj" scale="1 1 1"/>
+    <!-- burger mesh - use the original from Hamburger folder -->
+    <mesh name="burger_mesh" file="Hamburger.obj" scale="2 2 2"/>
+    
+    <!-- Plate texture image is available -->
+    <texture name="plate_texture" type="2d" file="plate.png" />
+    <material name="plate_mat" texture="plate_texture" specular="0.5" shininess="0.6"/>
+  </asset>
+
+    <!-- single rigid body -->
+    <body name="burger_plate" pos="0 0 0.1">
+      <!-- plate visual with material -->
+      <geom type="mesh" mesh="plate_mesh" material="plate_mat" contype="0" conaffinity="0"/>
+      <!-- burger visual WITHOUT explicit material to use embedded MTL -->
+      <geom type="mesh" mesh="burger_mesh" pos="0 0 0.03" contype="0" conaffinity="0"/>
+
+      <!-- simplified collision (plate+burger together) -->
+      <geom name="collision_cyl" type="cylinder" size="0.12 0.05" pos="0 0 0.025" density="800" friction="0.6 0.005 0.0001"/>
+      
+      <!-- inertia/mass (combined) -->
+      <inertial mass="0.6" pos="0 0 0.025"/>
+    </body>
+
+</mujocoinclude>

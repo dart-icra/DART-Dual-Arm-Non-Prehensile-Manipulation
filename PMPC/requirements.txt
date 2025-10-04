@@ -1,0 +1,18 @@
+# Core dependencies
+numpy>=1.21.0
+scipy>=1.7.0
+matplotlib>=3.5.0
+
+# MuJoCo physics simulation
+mujoco>=2.3.0
+
+# Optimization
+casadi>=3.5.0
+
+# Video processing and utilities
+opencv-python>=4.5.0
+icecream>=2.1.0
+
+# Optional dependencies for enhanced features
+Pillow>=8.0.0  # Image processing
+h5py>=3.0.0    # Data storage
