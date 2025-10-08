@@ -1,10 +1,6 @@
-# Dual Arm Non-Prehensile Task (DualArmNPT)
-
-A comprehensive dual-arm robotics control system implementing Model Predictive Control (MPC) for non-prehensile manipulation tasks using MuJoCo physics simulation.
-
 ## Overview
 
-This repository provides three different implementations for controlling dual xArm7 robots to perform non-prehensile manipulation tasks (e.g., moving objects on a tray by tilting):
+This folder provides three different implementations for controlling dual xArm7 robots to perform non-prehensile manipulation tasks (e.g., moving objects on a tray by tilting) usign Physics-based MPC (PMPC) method:
 
 1. **`main.py`** - Simple, direct control implementation
 2. **`main_parallel.py`** - Parallel MPC computation with multiprocessing
